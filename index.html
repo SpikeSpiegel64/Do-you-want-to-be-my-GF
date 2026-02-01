@@ -73,6 +73,7 @@
       top: 60px;
       transform: translateX(40px);
       backdrop-filter: blur(8px);
+      transition: top 0.18s ease-out, left 0.18s ease-out;
     }
 
     /* Result Screen */
@@ -139,10 +140,7 @@
     const yesBtn = document.getElementById("yesBtn");
     const questionBox = document.getElementById("questionBox");
     const resultBox = document.getElementById("resultBox");
-
-    const buttonsArea = document.querySelector(".buttons");
-
-    noBtn.style.transition = "none"; // instant movement
+    const heading = document.querySelector("h1");
 
     document.addEventListener("mousemove", (e) => {
       const noRect = noBtn.getBoundingClientRect();
@@ -151,20 +149,46 @@
         e.clientY - (noRect.top + noRect.height / 2)
       );
 
-      if (distance < 120) {
+      if (distance < 140) {
         moveNoButton();
       }
     });
 
     function moveNoButton() {
-      const areaRect = buttonsArea.getBoundingClientRect();
+      const padding = 20;
 
-      const x = Math.random() * (areaRect.width - noBtn.offsetWidth);
-      const y = Math.random() * (areaRect.height - noBtn.offsetHeight);
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      const yesRect = yesBtn.getBoundingClientRect();
+      const headingRect = heading.getBoundingClientRect();
+
+      let x, y;
+      let safe = false;
+
+      while (!safe) {
+        x = Math.random() * (viewportWidth - noBtn.offsetWidth - padding);
+        y = Math.random() * (viewportHeight - noBtn.offsetHeight - padding);
+
+        const overlapsYes =
+          x < yesRect.right &&
+          x + noBtn.offsetWidth > yesRect.left &&
+          y < yesRect.bottom &&
+          y + noBtn.offsetHeight > yesRect.top;
+
+        const overlapsHeading =
+          x < headingRect.right &&
+          x + noBtn.offsetWidth > headingRect.left &&
+          y < headingRect.bottom &&
+          y + noBtn.offsetHeight > headingRect.top;
+
+        safe = !overlapsYes && !overlapsHeading;
+      }
 
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
-      noBtn.style.transform = "none"; // cancel initial transform
+      noBtn.style.transform = "none";
+      noBtn.style.position = "fixed";
     }
 
     yesBtn.addEventListener("click", () => {
