@@ -112,6 +112,25 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      font-size: 14px;
+      animation: sparkleFloat 1s ease-out forwards;
+      opacity: 0.9;
+    }
+
+    @keyframes sparkleFloat {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-40px) scale(0.4);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
@@ -134,7 +153,7 @@
     </p>
     <img src="https://media.giphy.com/media/l4FGpP4lxGGgK5CBW/giphy.gif" />
   </div>
-
+  
   <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
@@ -142,6 +161,19 @@
     const resultBox = document.getElementById("resultBox");
     const heading = document.querySelector("h1");
 
+    function createSparkle(x, y) {
+      const sparkle = document.createElement("div");
+      sparkle.className = "sparkle";
+      sparkle.textContent = Math.random() > 0.5 ? "💖" : "✨";
+
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => sparkle.remove(), 1000);
+    }
+    
     document.addEventListener("mousemove", (e) => {
       const noRect = noBtn.getBoundingClientRect();
       const distance = Math.hypot(
@@ -191,6 +223,15 @@
       noBtn.style.position = "fixed";
     }
 
+    yesBtn.addEventListener("mousemove", (e) => {
+      if (Math.random() > 0.7) return; // controls density
+
+      createSparkle(
+        e.clientX + (Math.random() * 10 - 5),
+        e.clientY + (Math.random() * 10 - 5)
+      );
+    });
+    
     yesBtn.addEventListener("click", () => {
       questionBox.style.display = "none";
       resultBox.style.display = "flex";
