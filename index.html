@@ -223,13 +223,24 @@
       noBtn.style.position = "fixed";
     }
 
-    yesBtn.addEventListener("mousemove", (e) => {
-      if (Math.random() > 0.7) return; // controls density
+      yesBtn.addEventListener("mouseenter", () => {
+      yesBtn.sparkleInterval = setInterval(() => {
+        const rect = yesBtn.getBoundingClientRect();
 
-      createSparkle(
-        e.clientX + (Math.random() * 10 - 5),
-        e.clientY + (Math.random() * 10 - 5)
-      );
+        const x =
+          rect.left +
+          Math.random() * rect.width;
+
+        const y =
+          rect.top +
+          Math.random() * rect.height;
+
+        createSparkle(x, y);
+      }, 120);
+    });
+
+    yesBtn.addEventListener("mouseleave", () => {
+      clearInterval(yesBtn.sparkleInterval);
     });
     
     yesBtn.addEventListener("click", () => {
