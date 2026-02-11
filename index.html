@@ -39,6 +39,10 @@
       width: 420px;
       height: 160px;
       margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
     }
 
     button {
@@ -54,9 +58,7 @@
     #yesBtn {
       background: #ff3b7d;
       color: white;
-      left: 50%;
-      top: 60px;
-      transform: translateX(-110%);
+      position: relative;
       box-shadow: 0 0 25px rgba(255, 59, 125, 0.6);
       animation: pulse 2s infinite;
     }
@@ -69,9 +71,7 @@
     #noBtn {
       background: rgba(255,255,255,0.15);
       color: white;
-      left: 50%;
-      top: 60px;
-      transform: translateX(40px);
+      position: relative;
       backdrop-filter: blur(8px);
       transition: top 0.25s ease, left 0.25s ease;
     }
