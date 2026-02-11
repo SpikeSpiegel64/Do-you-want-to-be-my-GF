@@ -70,7 +70,7 @@
     #noBtn {
       background: rgba(255,255,255,0.15);
       color: white;
-      position: fixed; /* changed */
+      position: relative;   /* BACK to relative */
       backdrop-filter: blur(8px);
       transition: top 0.25s ease-out, left 0.25s ease-out;
     }
@@ -160,20 +160,15 @@
     const resultBox = document.getElementById("resultBox");
     const heading = document.querySelector("h1");
 
-    window.addEventListener("load", () => {
-      const yesRect = yesBtn.getBoundingClientRect();
-      const gap = 40;
+    function moveNoButton() {
 
-      const centerX = window.innerWidth / 2;
-      const yesWidth = yesRect.width;
-      const noWidth = noBtn.offsetWidth;
-
-      const yesLeft = centerX - (yesWidth / 2) - (gap / 2);
-      const noLeft = centerX + (gap / 2);
-
-      noBtn.style.left = `${noLeft}px`;
-      noBtn.style.top = `${yesRect.top}px`;
-    });
+      // If still relative, lock its current position before switching
+      if (noBtn.style.position !== "fixed") {
+        const rect = noBtn.getBoundingClientRect();
+        noBtn.style.left = `${rect.left}px`;
+        noBtn.style.top = `${rect.top}px`;
+        noBtn.style.position = "fixed";
+      }
     
     function createSparkle(x, y) {
       const sparkle = document.createElement("div");
