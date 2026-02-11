@@ -162,13 +162,18 @@
 
     window.addEventListener("load", () => {
       const yesRect = yesBtn.getBoundingClientRect();
-      const gap = 40; // same as your flex gap
+      const gap = 40;
 
-      const initialLeft = yesRect.left + yesRect.width + gap;
-      const initialTop = yesRect.top;
+      const centerX = window.innerWidth / 2;
+      const yesWidth = yesRect.width;
+      const noWidth = noBtn.offsetWidth;
 
-      noBtn.style.left = `${initialLeft}px`;
-      noBtn.style.top = `${initialTop}px`;
+      // YES sits slightly left of center because of flex
+      const yesLeft = centerX - (yesWidth / 2) - (gap / 2);
+      const noLeft = centerX + (gap / 2);
+
+      noBtn.style.left = `${noLeft}px`;
+      noBtn.style.top = `${yesRect.top}px`;
     });
     
     function createSparkle(x, y) {
