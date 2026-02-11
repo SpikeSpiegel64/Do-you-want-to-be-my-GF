@@ -71,9 +71,9 @@
     #noBtn {
       background: rgba(255,255,255,0.15);
       color: white;
-      position: relative;
+      position: fixed; /* changed */
       backdrop-filter: blur(8px);
-      transition: top 0.25s ease, left 0.25s ease;
+      transition: top 0.25s ease-out, left 0.25s ease-out;
     }
 
     /* Result Screen */
@@ -161,6 +161,13 @@
     const resultBox = document.getElementById("resultBox");
     const heading = document.querySelector("h1");
 
+    window.addEventListener("load", () => {
+      const yesRect = yesBtn.getBoundingClientRect();
+
+      noBtn.style.left = `${yesRect.right + 40}px`;
+      noBtn.style.top = `${yesRect.top}px`;
+    });
+    
     function createSparkle(x, y) {
       const sparkle = document.createElement("div");
       sparkle.className = "sparkle";
@@ -220,7 +227,6 @@
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
       noBtn.style.transform = "none";
-      noBtn.style.position = "fixed";
     }
 
       yesBtn.addEventListener("mouseenter", () => {
