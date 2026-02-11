@@ -51,7 +51,6 @@
       border-radius: 40px;
       border: none;
       cursor: pointer;
-      position: absolute;
       transition: all 0.4s ease;
     }
 
@@ -163,9 +162,13 @@
 
     window.addEventListener("load", () => {
       const yesRect = yesBtn.getBoundingClientRect();
+      const gap = 40; // same as your flex gap
 
-      noBtn.style.left = `${yesRect.right + 40}px`;
-      noBtn.style.top = `${yesRect.top}px`;
+      const initialLeft = yesRect.left + yesRect.width + gap;
+      const initialTop = yesRect.top;
+
+      noBtn.style.left = `${initialLeft}px`;
+      noBtn.style.top = `${initialTop}px`;
     });
     
     function createSparkle(x, y) {
