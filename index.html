@@ -37,12 +37,8 @@ body {
 }
 
 @keyframes floatUp {
-  from {
-    transform: translateY(100vh);
-  }
-  to {
-    transform: translateY(-10vh);
-  }
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
 }
 
 /* Main content */
@@ -53,7 +49,7 @@ body {
 }
 
 h1 {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   color: #ff5c8a;
   margin-bottom: 40px;
 }
@@ -102,23 +98,18 @@ button {
   align-items: center;
 }
 
-.result h1 {
-  font-size: 2.5rem;
-}
-
-.result p {
-  color: #ff6fa5;
-  font-size: 1.2rem;
-  max-width: 400px;
-}
-
 .result img {
   width: 320px;
   margin-top: 25px;
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(255,111,165,0.4);
 }
-  
+
+.result p {
+  color: #ff6fa5;
+  font-size: 1.2rem;
+  max-width: 500px;
+}
 </style>
 </head>
 
@@ -135,13 +126,14 @@ button {
 </div>
 
 <div class="container result" id="resultBox">
-  <h1>I CHOOSE YOU!!! ⚡❤️</h1>
+  <h1>I CHOOSE YOU!!! 💖</h1>
 
   <img 
-   src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
-   alt="Your Name romantic gif"
- />
-  <p style="margin-top:25px; max-width:500px;">
+    src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
+    alt="Cute romantic gif"
+  />
+
+  <p>
     Out of all the humans in this universe,  
     in every timeline, in every parallel dimension —  
     I choose you. Always you. 🐧💖
@@ -154,10 +146,9 @@ const noBtn = document.getElementById("noBtn");
 const questionBox = document.getElementById("questionBox");
 const resultBox = document.getElementById("resultBox");
 
-/* YES click */
+/* YES click with heart explosion */
 yesBtn.addEventListener("click", () => {
 
-  // mini heart explosion
   for (let i = 0; i < 20; i++) {
     const heart = document.createElement("div");
     heart.textContent = "💖";
@@ -167,7 +158,6 @@ yesBtn.addEventListener("click", () => {
     heart.style.fontSize = "20px";
     heart.style.pointerEvents = "none";
     heart.style.transition = "all 1s ease";
-
     document.body.appendChild(heart);
 
     setTimeout(() => {
@@ -185,17 +175,15 @@ yesBtn.addEventListener("click", () => {
   }, 500);
 });
 
-/* NO runs away */
+/* NO button chaos */
 let firstMove = true;
 
-let noMessages = [
+const noMessages = [
   "Naurr 😢",
   "but but but 😣",
   "be serious 😤",
   "think about it 🥺",
   "think about our kids 🐽",
-  "I am 8 months pregnant 😷",
-  "Dhaunoo Stoppppp 🥺",
   "I have snacks tho 🍪",
   "last chance 👀"
 ];
@@ -203,8 +191,8 @@ let noMessages = [
 let noIndex = 0;
 
 noBtn.addEventListener("mouseenter", () => {
-  const padding = 20;
 
+  const padding = 20;
   const maxX = window.innerWidth - noBtn.offsetWidth - padding;
   const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
@@ -222,21 +210,18 @@ noBtn.addEventListener("mouseenter", () => {
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 
-  // Change text each time
   noBtn.textContent = noMessages[noIndex % noMessages.length];
   noIndex++;
 
-  // Slight shrink for drama
   noBtn.style.transform = "scale(0.9)";
   setTimeout(() => {
     noBtn.style.transform = "scale(1)";
   }, 150);
 
-  // Make YES slightly stronger
   yesBtn.style.transform = "scale(1.05)";
 });
 
-/* Create floating ducks, capybaras & hearts */
+/* Floating wallpaper emojis */
 const bg = document.getElementById("background");
 const emojis = ["🦆","🐹","💗","💖","🩷"];
 
@@ -244,11 +229,9 @@ for (let i = 0; i < 25; i++) {
   const el = document.createElement("div");
   el.className = "floating";
   el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-
   el.style.left = Math.random() * 100 + "vw";
   el.style.animationDuration = (8 + Math.random() * 10) + "s";
   el.style.fontSize = (20 + Math.random() * 25) + "px";
-
   bg.appendChild(el);
 }
 </script>
