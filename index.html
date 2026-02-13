@@ -187,6 +187,7 @@ yesBtn.addEventListener("click", () => {
 
 /* NO runs away */
 let firstMove = true;
+
 let noMessages = [
   "Naurr 😢",
   "but but but 😣",
@@ -194,12 +195,9 @@ let noMessages = [
   "think about it 🥺",
   "think about our kids 🐽",
   "I am 8 months pregnant 😷",
-  "Dhaunoo Stoppppp 🥺"
+  "Dhaunoo Stoppppp 🥺",
   "I have snacks tho 🍪",
   "last chance 👀"
-
-  yesBtn.style.transform = "scale(1.05)";
-  
 ];
 
 let noIndex = 0;
@@ -233,8 +231,11 @@ noBtn.addEventListener("mouseenter", () => {
   setTimeout(() => {
     noBtn.style.transform = "scale(1)";
   }, 150);
+
+  // Make YES slightly stronger
+  yesBtn.style.transform = "scale(1.05)";
 });
-  
+
 /* Create floating ducks, capybaras & hearts */
 const bg = document.getElementById("background");
 const emojis = ["🦆","🐹","💗","💖","🩷"];
