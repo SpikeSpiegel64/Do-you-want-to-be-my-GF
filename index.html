@@ -1,240 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For You 💖</title>
+  <meta charset="UTF-8">
+  <title>For You 💖</title>
 
-<style>
-* {
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #fff5f8, #ffe3ec);
-}
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #fff5f8, #ffe3ec);
+    }
 
-/* Floating wallpaper */
-.background {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 0;
-}
+    /* Floating wallpaper */
+    .background {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
 
-.floating {
-  position: absolute;
-  font-size: 28px;
-  opacity: 0.5;
-  animation: floatUp linear infinite;
-}
+    .floating {
+      position: absolute;
+      font-size: 28px;
+      opacity: 0.5;
+      animation: floatUp linear infinite;
+    }
 
-@keyframes floatUp {
-  from { transform: translateY(100vh); }
-  to { transform: translateY(-10vh); }
-}
+    @keyframes floatUp {
+      from { transform: translateY(100vh); }
+      to { transform: translateY(-10vh); }
+    }
 
-/* Main content */
-.container {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
+    /* Main content */
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
 
-h1 {
-  font-size: 2.6rem;
-  color: #ff5c8a;
-  margin-bottom: 40px;
-}
+    h1 {
+      font-size: 2.8rem;
+      color: #ff5c8a;
+      margin-bottom: 40px;
+    }
 
-/* Buttons */
-.buttons {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-}
+    /* Buttons */
+    .buttons {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+    }
 
-button {
-  padding: 18px 40px;
-  font-size: 1.2rem;
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+    button {
+      padding: 18px 40px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-#yesBtn {
-  background: #ff6fa5;
-  color: white;
-  box-shadow: 0 0 20px rgba(255,111,165,0.6);
-}
+    #yesBtn {
+      background: #ff6fa5;
+      color: white;
+      box-shadow: 0 0 20px rgba(255,111,165,0.6);
+    }
 
-#yesBtn:hover {
-  transform: scale(1.15);
-  box-shadow: 0 0 35px rgba(255,111,165,0.9);
-}
+    #yesBtn:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 35px rgba(255,111,165,0.9);
+    }
 
-#noBtn {
-  background: white;
-  color: #ff6fa5;
-  box-shadow: 0 0 15px rgba(0,0,0,0.05);
-}
+    #noBtn {
+      background: white;
+      color: #ff6fa5;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    }
 
-#noBtn:hover {
-  transform: scale(1.05);
-}
+    #noBtn:hover {
+      transform: scale(1.05);
+    }
 
-/* Result screen */
-.result {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-}
+    /* Result screen */
+    .result {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
 
-.result img {
-  width: 320px;
-  margin-top: 25px;
-  border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(255,111,165,0.4);
-}
+    .result h1 {
+      font-size: 2.5rem;
+    }
 
-.result p {
-  color: #ff6fa5;
-  font-size: 1.2rem;
-  max-width: 500px;
-}
-</style>
+    .result p {
+      color: #ff6fa5;
+      font-size: 1.2rem;
+      max-width: 400px;
+    }
+
+    .result img {
+      width: 320px;
+      margin-top: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(255,111,165,0.4);
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="background" id="background"></div>
+  <div class="background" id="background"></div>
 
-<div class="container" id="questionBox">
-  <h1>Are you willing to spend your next 768 years with me? 🐧</h1>
-  <div class="buttons">
-    <button id="yesBtn">Yeasss! 😍</button>
-    <button id="noBtn">Naurr 😢</button>
+  <div class="container" id="questionBox">
+    <h1>Are you willing to spend your next 768 years with me? 🐧</h1>
+    <div class="buttons">
+      <button id="yesBtn">Yeasss! 😍</button>
+      <button id="noBtn">Naurr 😢</button>
+    </div>
   </div>
-</div>
 
-<div class="container result" id="resultBox">
-  <h1>I CHOOSE YOU!!! 💖</h1>
+  <div class="container result" id="resultBox">
+    <h1>I CHOOSE YOU!!! ⚡❤️</h1>
 
-  <img 
-    src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
-    alt="Cute romantic gif"
-  />
+    <img 
+      src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
+      alt="Your Name romantic gif"
+    />
 
-  <p>
-    Out of all the humans in this universe,  
-    in every timeline, in every parallel dimension —  
-    I choose you. Always you. 🐧💖
-  </p>
-</div>
+    <p style="margin-top:25px; max-width:500px;">
+      Out of all the humans in this universe, in every timeline, 
+      in every parallel dimension — I choose you. Always you. 🐧💖
+    </p>
+  </div>
 
-<script>
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const questionBox = document.getElementById("questionBox");
-const resultBox = document.getElementById("resultBox");
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const questionBox = document.getElementById("questionBox");
+    const resultBox = document.getElementById("resultBox");
 
-/* YES click with heart explosion */
-yesBtn.addEventListener("click", () => {
+    /* YES click */
+    yesBtn.addEventListener("click", () => {
+      questionBox.style.display = "none";
+      resultBox.style.display = "flex";
+    });
 
-  for (let i = 0; i < 20; i++) {
-    const heart = document.createElement("div");
-    heart.textContent = "💖";
-    heart.style.position = "fixed";
-    heart.style.left = window.innerWidth / 2 + "px";
-    heart.style.top = window.innerHeight / 2 + "px";
-    heart.style.fontSize = "20px";
-    heart.style.pointerEvents = "none";
-    heart.style.transition = "all 1s ease";
-    document.body.appendChild(heart);
+    /* NO runs away */
+    let firstMove = true;
 
-    setTimeout(() => {
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.top = Math.random() * window.innerHeight + "px";
-      heart.style.opacity = 0;
-    }, 10);
+    noBtn.addEventListener("mouseenter", () => {
+      const padding = 20;
 
-    setTimeout(() => heart.remove(), 1000);
-  }
+      const maxX = Math.max(0, window.innerWidth - noBtn.offsetWidth - padding);
+      const maxY = Math.max(0, window.innerHeight - noBtn.offsetHeight - padding);
 
-  setTimeout(() => {
-    questionBox.style.display = "none";
-    resultBox.style.display = "flex";
-  }, 500);
-});
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
 
-/* NO button chaos */
-let firstMove = true;
+      if (firstMove) {
+        const rect = noBtn.getBoundingClientRect();
+        noBtn.style.position = "fixed";
+        noBtn.style.left = rect.left + "px";
+        noBtn.style.top = rect.top + "px";
+        firstMove = false;
+      }
 
-const noMessages = [
-  "Naurr 😢",
-  "but but but 😣",
-  "be serious 😤",
-  "think about it 🥺",
-  "think about our kids 🐽",
-  "I have snacks tho 🍪",
-  "last chance 👀"
-];
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
 
-let noIndex = 0;
+    /* Floating emojis */
+    const bg = document.getElementById("background");
+    const emojis = ["🦆","🐹","💗","💖","🩷"];
 
-noBtn.addEventListener("mouseenter", () => {
-
-  const padding = 20;
-  const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-  const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  if (firstMove) {
-    const rect = noBtn.getBoundingClientRect();
-    noBtn.style.position = "fixed";
-    noBtn.style.left = rect.left + "px";
-    noBtn.style.top = rect.top + "px";
-    firstMove = false;
-  }
-
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-
-  noBtn.textContent = noMessages[noIndex % noMessages.length];
-  noIndex++;
-
-  noBtn.style.transform = "scale(0.9)";
-  setTimeout(() => {
-    noBtn.style.transform = "scale(1)";
-  }, 150);
-
-  yesBtn.style.transform = "scale(1.05)";
-});
-
-/* Floating wallpaper emojis */
-const bg = document.getElementById("background");
-const emojis = ["🦆","🐹","💗","💖","🩷"];
-
-for (let i = 0; i < 25; i++) {
-  const el = document.createElement("div");
-  el.className = "floating";
-  el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-  el.style.left = Math.random() * 100 + "vw";
-  el.style.animationDuration = (8 + Math.random() * 10) + "s";
-  el.style.fontSize = (20 + Math.random() * 25) + "px";
-  bg.appendChild(el);
-}
-</script>
+    for (let i = 0; i < 25; i++) {
+      const el = document.createElement("div");
+      el.className = "floating";
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.animationDuration = (8 + Math.random() * 10) + "s";
+      el.style.fontSize = (20 + Math.random() * 25) + "px";
+      bg.appendChild(el);
+    }
+  </script>
 
 </body>
 </html>
