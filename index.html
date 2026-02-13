@@ -156,12 +156,53 @@ const resultBox = document.getElementById("resultBox");
 
 /* YES click */
 yesBtn.addEventListener("click", () => {
-  questionBox.style.display = "none";
-  resultBox.style.display = "flex";
+
+  // mini heart explosion
+  for (let i = 0; i < 20; i++) {
+    const heart = document.createElement("div");
+    heart.textContent = "💖";
+    heart.style.position = "fixed";
+    heart.style.left = window.innerWidth / 2 + "px";
+    heart.style.top = window.innerHeight / 2 + "px";
+    heart.style.fontSize = "20px";
+    heart.style.pointerEvents = "none";
+    heart.style.transition = "all 1s ease";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.top = Math.random() * window.innerHeight + "px";
+      heart.style.opacity = 0;
+    }, 10);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
+
+  setTimeout(() => {
+    questionBox.style.display = "none";
+    resultBox.style.display = "flex";
+  }, 500);
 });
 
 /* NO runs away */
 let firstMove = true;
+let noMessages = [
+  "Naurr 😢",
+  "but but but 😣",
+  "be serious 😤",
+  "think about it 🥺",
+  "think about our kids 🐽",
+  "I am 8 months pregnant 😷",
+  "Dhaunoo Stoppppp 🥺"
+  "I have snacks tho 🍪",
+  "last chance 👀"
+
+  yesBtn.style.transform = "scale(1.05)";
+  
+];
+
+let noIndex = 0;
 
 noBtn.addEventListener("mouseenter", () => {
   const padding = 20;
@@ -172,7 +213,6 @@ noBtn.addEventListener("mouseenter", () => {
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
 
-  // On first move, lock it to fixed so it doesn't snap weirdly
   if (firstMove) {
     const rect = noBtn.getBoundingClientRect();
     noBtn.style.position = "fixed";
@@ -183,8 +223,18 @@ noBtn.addEventListener("mouseenter", () => {
 
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
-});
 
+  // Change text each time
+  noBtn.textContent = noMessages[noIndex % noMessages.length];
+  noIndex++;
+
+  // Slight shrink for drama
+  noBtn.style.transform = "scale(0.9)";
+  setTimeout(() => {
+    noBtn.style.transform = "scale(1)";
+  }, 150);
+});
+  
 /* Create floating ducks, capybaras & hearts */
 const bg = document.getElementById("background");
 const emojis = ["🦆","🐹","💗","💖","🩷"];
