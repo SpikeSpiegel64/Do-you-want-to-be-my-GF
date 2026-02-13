@@ -1,260 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>For You 💖</title>
+<meta charset="UTF-8">
+<title>For You 💖</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
-    body {
-      margin: 0;
-      height: 100vh;
-      background: radial-gradient(circle at top, #ff6fa5, #120016);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff5f8, #ffe3ec);
+}
 
-    .container {
-      text-align: center;
-      position: relative;
-      animation: fadeIn 1.5s ease;
-    }
+/* Floating wallpaper */
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
 
-    h1 {
-      font-size: 3.2rem;
-      color: #fff;
-      margin-bottom: 40px;
-      font-weight: 500;
-      text-shadow: 0 0 20px rgba(255, 110, 165, 0.6);
-    }
+.floating {
+  position: absolute;
+  font-size: 28px;
+  opacity: 0.5;
+  animation: floatUp linear infinite;
+}
 
-    .buttons {
-      position: relative;
-      width: 420px;
-      height: 160px;
-      margin: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-    }
+@keyframes floatUp {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(-10vh);
+  }
+}
 
-    button {
-      padding: 16px 36px;
-      font-size: 1.3rem;
-      border-radius: 40px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.4s ease;
-    }
+/* Main content */
+.container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
 
-    #yesBtn {
-      background: #ff3b7d;
-      color: white;
-      position: relative;
-      box-shadow: 0 0 25px rgba(255, 59, 125, 0.6);
-      animation: pulse 2s infinite;
-    }
+h1 {
+  font-size: 2.8rem;
+  color: #ff5c8a;
+  margin-bottom: 40px;
+}
 
-    #yesBtn:hover {
-      transform: translateX(-50%) scale(1.15);
-      box-shadow: 0 0 40px rgba(255, 59, 125, 0.9);
-    }
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
 
-    #noBtn {
-      background: rgba(255,255,255,0.15);
-      color: white;
-      position: relative; 
-      backdrop-filter: blur(8px);
-      transition: top 0.25s ease-out, left 0.25s ease-out;
-    }
+button {
+  padding: 18px 40px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-    .result {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      animation: fadeIn 1.5s ease;
-    }
+#yesBtn {
+  background: #ff6fa5;
+  color: white;
+  box-shadow: 0 0 20px rgba(255,111,165,0.6);
+}
 
-    .result h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
+#yesBtn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 35px rgba(255,111,165,0.9);
+}
 
-    .result p {
-      color: #ffd1e3;
-      font-size: 1.2rem;
-      max-width: 500px;
-    }
+#noBtn {
+  background: white;
+  color: #ff6fa5;
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
 
-    .result img {
-      width: 320px;
-      margin-top: 30px;
-      border-radius: 24px;
-      box-shadow: 0 0 30px rgba(255, 59, 125, 0.6);
-    }
+#noBtn:hover {
+  transform: scale(1.05);
+}
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 20px rgba(255,59,125,0.5); }
-      50% { box-shadow: 0 0 45px rgba(255,59,125,0.9); }
-      100% { box-shadow: 0 0 20px rgba(255,59,125,0.5); }
-    }
+/* Result screen */
+.result {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.result h1 {
+  font-size: 2.5rem;
+}
 
-    .sparkle {
-      position: fixed;
-      pointer-events: none;
-      font-size: 14px;
-      animation: sparkleFloat 1s ease-out forwards;
-      opacity: 0.9;
-    }
-
-    @keyframes sparkleFloat {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-40px) scale(0.4);
-        opacity: 0;
-      }
-    }
-  </style>
+.result p {
+  color: #ff6fa5;
+  font-size: 1.2rem;
+  max-width: 400px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container" id="questionBox">
-    <h1>Will you be my Valentine? 💗</h1>
+<div class="background" id="background"></div>
 
-    <div class="buttons">
-      <button id="yesBtn">Yes 💖</button>
-      <button id="noBtn">No</button>
-    </div>
+<div class="container" id="questionBox">
+  <h1>Will you be my Valentine? 💗</h1>
+  <div class="buttons">
+    <button id="yesBtn">Yeasss! 😍</button>
+    <button id="noBtn">Naurr 😢</button>
   </div>
+</div>
 
-  <div class="container result" id="resultBox">
-    <h1>You just made me very happy 💕</h1>
-    <p>
-      I just wanted you to know that this wasn’t a joke —  
-      I really meant it.
-    </p>
-    <img src="https://media.giphy.com/media/l4FGpP4lxGGgK5CBW/giphy.gif" />
-  </div>
-  
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const questionBox = document.getElementById("questionBox");
-    const resultBox = document.getElementById("resultBox");
-    const heading = document.querySelector("h1");
+<div class="container result" id="resultBox">
+  <h1>You just made me the happiest person 🥹💖</h1>
+  <p>I promise I’ll treat you better than a capybara treats its orange 🍊</p>
+</div>
 
-    function moveNoButton() {
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const questionBox = document.getElementById("questionBox");
+const resultBox = document.getElementById("resultBox");
 
-      // If still relative, lock its current position before switching
-      if (noBtn.style.position !== "fixed") {
-        const rect = noBtn.getBoundingClientRect();
-        noBtn.style.left = `${rect.left}px`;
-        noBtn.style.top = `${rect.top}px`;
-        noBtn.style.position = "fixed";
-      }
-    
-    function createSparkle(x, y) {
-      const sparkle = document.createElement("div");
-      sparkle.className = "sparkle";
-      sparkle.textContent = Math.random() > 0.5 ? "💖" : "✨";
+/* YES click */
+yesBtn.addEventListener("click", () => {
+  questionBox.style.display = "none";
+  resultBox.style.display = "flex";
+});
 
-      sparkle.style.left = `${x}px`;
-      sparkle.style.top = `${y}px`;
+/* NO runs away */
+noBtn.addEventListener("mouseenter", () => {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
 
-      document.body.appendChild(sparkle);
+  noBtn.style.position = "absolute";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
 
-      setTimeout(() => sparkle.remove(), 1000);
-    }
-    
-    document.addEventListener("mousemove", (e) => {
-      const noRect = noBtn.getBoundingClientRect();
-      const distance = Math.hypot(
-        e.clientX - (noRect.left + noRect.width / 2),
-        e.clientY - (noRect.top + noRect.height / 2)
-      );
+/* Create floating ducks, capybaras & hearts */
+const bg = document.getElementById("background");
+const emojis = ["🦆","🐹","💗","💖","🩷"];
 
-      if (distance < 100) {
-        moveNoButton();
-      }
-    });
+for (let i = 0; i < 25; i++) {
+  const el = document.createElement("div");
+  el.className = "floating";
+  el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
 
-    function moveNoButton() {
-      const padding = 20;
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.animationDuration = (8 + Math.random() * 10) + "s";
+  el.style.fontSize = (20 + Math.random() * 25) + "px";
 
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-
-      const yesRect = yesBtn.getBoundingClientRect();
-      const headingRect = heading.getBoundingClientRect();
-
-      let x, y;
-      let safe = false;
-
-      while (!safe) {
-        x = Math.random() * (viewportWidth - noBtn.offsetWidth - padding);
-        y = Math.random() * (viewportHeight - noBtn.offsetHeight - padding);
-
-        const overlapsYes =
-          x < yesRect.right &&
-          x + noBtn.offsetWidth > yesRect.left &&
-          y < yesRect.bottom &&
-          y + noBtn.offsetHeight > yesRect.top;
-
-        const overlapsHeading =
-          x < headingRect.right &&
-          x + noBtn.offsetWidth > headingRect.left &&
-          y < headingRect.bottom &&
-          y + noBtn.offsetHeight > headingRect.top;
-
-        safe = !overlapsYes && !overlapsHeading;
-      }
-
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
-      noBtn.style.transform = "none";
-    }
-
-      yesBtn.addEventListener("mouseenter", () => {
-      yesBtn.sparkleInterval = setInterval(() => {
-        const rect = yesBtn.getBoundingClientRect();
-
-        const x =
-          rect.left +
-          Math.random() * rect.width;
-
-        const y =
-          rect.top +
-          Math.random() * rect.height;
-
-        createSparkle(x, y);
-      }, 120);
-    });
-
-    yesBtn.addEventListener("mouseleave", () => {
-      clearInterval(yesBtn.sparkleInterval);
-    });
-    
-    yesBtn.addEventListener("click", () => {
-      questionBox.style.display = "none";
-      resultBox.style.display = "flex";
-    });
-  </script>
+  bg.appendChild(el);
+}
+</script>
 
 </body>
 </html>
