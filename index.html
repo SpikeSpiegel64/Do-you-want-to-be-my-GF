@@ -46,14 +46,17 @@
       position: relative;
       z-index: 1;
       text-align: center;
-      max-width: 750px;
+      max-width: 850px;
       width: 100%;
     }
 
+    /* ✅ PERFECT HEADING SCALING */
     h1 {
-      font-size: 2.6rem;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
       color: #ff5c8a;
       margin-bottom: 40px;
+      line-height: 1.2;
+      white-space: nowrap;
     }
 
     /* Buttons */
@@ -102,7 +105,8 @@
     }
 
     .result h1 {
-      font-size: 2.3rem;
+      font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+      white-space: nowrap;
     }
 
     .result p {
@@ -140,14 +144,11 @@
       }
     }
 
-    /* 📱 Mobile */
+    /* 📱 Allow wrapping on small phones */
     @media (max-width: 600px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
+      h1,
       .result h1 {
-        font-size: 1.6rem;
+        white-space: normal;
       }
 
       .result p {
@@ -162,120 +163,3 @@
 
   </style>
 </head>
-
-<body>
-
-  <div class="background" id="background"></div>
-
-  <div class="container" id="questionBox">
-    <h1>Are you willing to spend your next 768 years with me? 🐧</h1>
-    <div class="buttons">
-      <button id="yesBtn">YEASS!!! 😍</button>
-      <button id="noBtn">NAUUR... 😢</button>
-    </div>
-  </div>
-
-  <div class="container result" id="resultBox">
-    <h1>YAYYY! YOU HAD NO OTHER CHOICE ANYWAYS!! 🤭</h1>
-
-    <img 
-      src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
-      alt="Romantic gif"
-    />
-
-    <p>
-Happy MONTHAVERSARY and also Happy VALENTINES day My DEAR CHINKARANNIIII.
-
-I am grate to god that I got to meet you.. That last 2.7 years literally were like a rollercoaster,
-each time i get to be with you, I feel butterfly in my tummy. 
-Babe, You are the one god had tied my invisible string to.
-You are the one that I am enchanted to meet.
-You are the one that I will marry with paper rings.
-You are the one who is a Tear in my Heart.
-You are the one for whom, I will get beat to smithereens.
-
-Chinkarani, You are the one I would forever like to treasure, in my heart, my eyes, and my soul.
-
-Once again, happy valentines day love. To the next 768 valentines that I promise we will celebrate together.
-
-- Your Love, 
-Muditiii
-    </p>
-  </div>
-
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const questionBox = document.getElementById("questionBox");
-    const resultBox = document.getElementById("resultBox");
-
-    yesBtn.addEventListener("click", () => {
-
-      const colors = ["#ff6fa5", "#ffd166", "#06d6a0", "#118ab2", "#ef476f"];
-
-      for (let i = 0; i < 120; i++) {
-        const confetti = document.createElement("div");
-        confetti.classList.add("confetti");
-
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.backgroundColor =
-          colors[Math.floor(Math.random() * colors.length)];
-
-        confetti.style.width =
-          confetti.style.height =
-          Math.random() * 8 + 6 + "px";
-
-        confetti.style.animationDuration =
-          Math.random() * 1 + 1.5 + "s";
-
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 2500);
-      }
-
-      setTimeout(() => {
-        questionBox.style.display = "none";
-        resultBox.style.display = "flex";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 600);
-    });
-
-    let firstMove = true;
-
-    noBtn.addEventListener("mouseenter", () => {
-      const padding = 20;
-
-      const maxX = Math.max(0, window.innerWidth - noBtn.offsetWidth - padding);
-      const maxY = Math.max(0, window.innerHeight - noBtn.offsetHeight - padding);
-
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
-
-      if (firstMove) {
-        const rect = noBtn.getBoundingClientRect();
-        noBtn.style.position = "fixed";
-        noBtn.style.left = rect.left + "px";
-        noBtn.style.top = rect.top + "px";
-        firstMove = false;
-      }
-
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
-
-    const bg = document.getElementById("background");
-    const emojis = ["🦆","🐹","💗","💖","🩷"];
-
-    for (let i = 0; i < 25; i++) {
-      const el = document.createElement("div");
-      el.className = "floating";
-      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-      el.style.left = Math.random() * 100 + "vw";
-      el.style.animationDuration = (8 + Math.random() * 10) + "s";
-      el.style.fontSize = (20 + Math.random() * 25) + "px";
-      bg.appendChild(el);
-    }
-
-  </script>
-
-</body>
-</html>
