@@ -17,7 +17,8 @@
       background: linear-gradient(135deg, #fff5f8, #ffe3ec);
       display: flex;
       justify-content: center;
-      padding: 50px 20px;
+      align-items: center; /* CENTER FIX */
+      padding: 20px;
     }
 
     /* Floating wallpaper */
@@ -107,15 +108,25 @@
       display: none;
       flex-direction: column;
       align-items: center;
+      padding-top: 40px;
     }
 
-    .result p {
-      color: #ff6fa5;
-      font-size: 1.15rem;
-      line-height: 1.8;
-      margin-top: 25px;
-      padding: 0 10px;
+    /* 💌 LOVE LETTER CARD */
+    .love-card {
+      background: white;
+      border-radius: 25px;
+      padding: 30px 35px;
+      margin-top: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      max-width: 700px;
+    }
+
+    .love-card p {
+      color: #ff5c8a;
+      font-size: 1.1rem;
+      line-height: 1.9;
       white-space: pre-line;
+      margin: 0;
     }
 
     .result img {
@@ -169,7 +180,11 @@
         white-space: normal;
       }
 
-      .result p {
+      .love-card {
+        padding: 20px;
+      }
+
+      .love-card p {
         font-size: 1rem;
       }
 
@@ -202,7 +217,8 @@
       alt="Romantic gif"
     />
 
-    <p>
+    <div class="love-card">
+      <p>
 Happy MONTHAVERSARY and also Happy VALENTINES day My DEAR CHINKARANNIIII.
 
 I am grate to god that I got to meet you.. That last 2.7 years literally were like a rollercoaster,
@@ -219,7 +235,8 @@ Once again, happy valentines day love. To the next 768 valentines that I promise
 
 - Your Love, 
 Muditiii
-    </p>
+      </p>
+    </div>
   </div>
 
   <script>
@@ -230,7 +247,7 @@ Muditiii
 
     yesBtn.addEventListener("click", () => {
 
-      /* Sparkles from button */
+      /* Sparkles */
       const rect = yesBtn.getBoundingClientRect();
       for (let i = 0; i < 25; i++) {
         const sparkle = document.createElement("div");
@@ -274,6 +291,7 @@ Muditiii
       setTimeout(() => {
         questionBox.style.display = "none";
         resultBox.style.display = "flex";
+        document.body.style.alignItems = "flex-start";
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 600);
     });
