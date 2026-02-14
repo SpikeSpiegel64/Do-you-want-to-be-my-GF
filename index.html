@@ -67,7 +67,7 @@
       border-radius: 50px;
       border: none;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     #yesBtn {
@@ -114,6 +114,25 @@
       border-radius: 20px;
       box-shadow: 0 10px 40px rgba(255,111,165,0.4);
     }
+
+    /* 🎉 Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      pointer-events: none;
+      opacity: 0.9;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
   </style>
 </head>
 
@@ -124,8 +143,8 @@
   <div class="container" id="questionBox">
     <h1>Are you willing to spend your next 768 years with me? 🐧</h1>
     <div class="buttons">
-      <button id="yesBtn">Yeasss! 😍</button>
-      <button id="noBtn">Naurr 😢</button>
+      <button id="yesBtn">YEASS!!! 😍</button>
+      <button id="noBtn">NAUUR... 😢</button>
     </div>
   </div>
 
@@ -134,7 +153,7 @@
 
     <img 
       src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
-      alt="Your Name romantic gif"
+      alt="Romantic gif"
     />
 
     <p style="margin-top:25px; max-width:500px;">
@@ -149,17 +168,41 @@
     const questionBox = document.getElementById("questionBox");
     const resultBox = document.getElementById("resultBox");
 
-    /* YES click */
+    /* 🎉 YES click with confetti */
     yesBtn.addEventListener("click", () => {
-      questionBox.style.display = "none";
-      resultBox.style.display = "flex";
+
+      const colors = ["#ff6fa5", "#ffd166", "#06d6a0", "#118ab2", "#ef476f"];
+
+      for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor =
+          colors[Math.floor(Math.random() * colors.length)];
+
+        confetti.style.width =
+          confetti.style.height =
+          Math.random() * 8 + 6 + "px";
+
+        confetti.style.animationDuration =
+          Math.random() * 1 + 1.5 + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 2500);
+      }
+
+      setTimeout(() => {
+        questionBox.style.display = "none";
+        resultBox.style.display = "flex";
+      }, 600);
     });
 
     /* NO runs away */
     let firstMove = true;
-    let yesScale = 1;
 
-    function moveNoButton() {
+    noBtn.addEventListener("mouseenter", () => {
       const padding = 20;
 
       const maxX = Math.max(0, window.innerWidth - noBtn.offsetWidth - padding);
@@ -178,21 +221,8 @@
 
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
+    });
 
-      // Make YES bigger each time
-      yesScale += 0.15;
-      yesBtn.style.transform = `scale(${yesScale})`;
-
-      // Stronger glow as it grows
-      yesBtn.style.boxShadow = `0 0 ${20 + yesScale * 10}px rgba(255,111,165,0.9)`;
-     }
-
-    // Desktop
-    noBtn.addEventListener("mouseenter", moveNoButton);
-
-    // Mobile
-    noBtn.addEventListener("touchstart", moveNoButton);
-    
     /* Floating emojis */
     const bg = document.getElementById("background");
     const emojis = ["🦆","🐹","💗","💖","🩷"];
@@ -206,6 +236,7 @@
       el.style.fontSize = (20 + Math.random() * 25) + "px";
       bg.appendChild(el);
     }
+
   </script>
 
 </body>
