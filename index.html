@@ -67,7 +67,7 @@
       border-radius: 50px;
       border: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     #yesBtn {
@@ -157,8 +157,9 @@
 
     /* NO runs away */
     let firstMove = true;
+    let yesScale = 1;
 
-    noBtn.addEventListener("mouseenter", () => {
+    function moveNoButton() {
       const padding = 20;
 
       const maxX = Math.max(0, window.innerWidth - noBtn.offsetWidth - padding);
@@ -177,8 +178,21 @@
 
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
-    });
 
+      // Make YES bigger each time
+      yesScale += 0.15;
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      // Stronger glow as it grows
+      yesBtn.style.boxShadow = `0 0 ${20 + yesScale * 10}px rgba(255,111,165,0.9)`;
+     }
+
+    // Desktop
+    noBtn.addEventListener("mouseenter", moveNoButton);
+
+    // Mobile
+    noBtn.addEventListener("touchstart", moveNoButton);
+    
     /* Floating emojis */
     const bg = document.getElementById("background");
     const emojis = ["🦆","🐹","💗","💖","🩷"];
