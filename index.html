@@ -50,7 +50,7 @@ body {
   margin: 0 auto;
 }
 
-/* Centered heading */
+/* Heading */
 #questionBox h1 {
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   color: #ff5c8a;
@@ -59,13 +59,6 @@ body {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  white-space: normal;
-}
-
-.result h1 {
-  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
-  color: #ff5c8a;
-  margin-bottom: 20px;
 }
 
 /* Buttons */
@@ -74,7 +67,6 @@ body {
   gap: 30px;
   justify-content: center;
   flex-wrap: wrap;
-  position: relative;
 }
 
 button {
@@ -101,6 +93,8 @@ button {
   background: white;
   color: #ff6fa5;
   box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  position: relative;
+  z-index: 5;
 }
 
 /* Result screen */
@@ -289,30 +283,24 @@ yesBtn.addEventListener("click", () => {
   }, 600);
 });
 
-/* NO BUTTON – WORKS ON DESKTOP + PHONE */
-let moveCount = 0;
-
+/* TRUE RANDOM MOVEMENT */
 function moveNoButton() {
-  const container = document.querySelector(".buttons");
-  const containerRect = container.getBoundingClientRect();
-  const btnRect = noBtn.getBoundingClientRect();
 
-  const maxX = containerRect.width - btnRect.width;
-  const maxY = containerRect.height - btnRect.height;
+  const btnWidth = noBtn.offsetWidth;
+  const btnHeight = noBtn.offsetHeight;
+
+  const maxX = window.innerWidth - btnWidth;
+  const maxY = window.innerHeight - btnHeight;
 
   const randomX = Math.random() * maxX;
   const randomY = Math.random() * maxY;
 
-  noBtn.style.position = "absolute";
+  noBtn.style.position = "fixed";
   noBtn.style.left = randomX + "px";
   noBtn.style.top = randomY + "px";
-
-  moveCount++;
-  yesBtn.style.transform = `scale(${1 + moveCount * 0.1})`;
 }
 
 noBtn.addEventListener("mouseenter", moveNoButton);
-
 noBtn.addEventListener("touchstart", function(e) {
   e.preventDefault();
   moveNoButton();
