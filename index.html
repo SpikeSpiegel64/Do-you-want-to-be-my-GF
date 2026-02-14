@@ -18,6 +18,7 @@ body {
   display: grid;
   place-items: center;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 /* Floating background */
@@ -105,6 +106,10 @@ button {
   padding-top: 40px;
 }
 
+.result h1 {
+  color: #ff5c8a;
+}
+
 /* Love letter card */
 .love-card {
   background: white;
@@ -152,12 +157,12 @@ button {
 /* Sparkles */
 .sparkle {
   position: fixed;
-  width: 8px;
-  height: 8px;
-  background: white;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #fff 0%, #ffd6e7 60%, transparent 100%);
   border-radius: 50%;
   pointer-events: none;
-  animation: sparkleBurst 0.8s ease-out forwards;
+  animation: sparkleBurst 1s ease-out forwards;
 }
 
 @keyframes sparkleBurst {
@@ -237,23 +242,27 @@ const resultBox = document.getElementById("resultBox");
 yesBtn.addEventListener("click", () => {
 
   const rect = yesBtn.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
 
-  for (let i = 0; i < 25; i++) {
+  /* Strong sparkle burst */
+  for (let i = 0; i < 40; i++) {
     const sparkle = document.createElement("div");
     sparkle.classList.add("sparkle");
-    sparkle.style.left = rect.left + rect.width/2 + "px";
-    sparkle.style.top = rect.top + rect.height/2 + "px";
+    sparkle.style.left = centerX + "px";
+    sparkle.style.top = centerY + "px";
 
     const angle = Math.random() * 2 * Math.PI;
-    const distance = Math.random() * 120 + 40;
+    const distance = Math.random() * 180 + 60;
 
-    sparkle.style.setProperty("--x", Math.cos(angle)*distance + "px");
-    sparkle.style.setProperty("--y", Math.sin(angle)*distance + "px");
+    sparkle.style.setProperty("--x", Math.cos(angle) * distance + "px");
+    sparkle.style.setProperty("--y", Math.sin(angle) * distance + "px");
 
     document.body.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 800);
+    setTimeout(() => sparkle.remove(), 1000);
   }
 
+  /* Confetti rain */
   const colors = ["#ff6fa5", "#ffd166", "#06d6a0", "#118ab2", "#ef476f"];
 
   for (let i = 0; i < 120; i++) {
@@ -283,14 +292,15 @@ yesBtn.addEventListener("click", () => {
   }, 600);
 });
 
-/* TRUE RANDOM MOVEMENT */
+/* TRUE FULL RANDOM MOVEMENT */
 function moveNoButton() {
+  const padding = 20;
 
   const btnWidth = noBtn.offsetWidth;
   const btnHeight = noBtn.offsetHeight;
 
-  const maxX = window.innerWidth - btnWidth;
-  const maxY = window.innerHeight - btnHeight;
+  const maxX = window.innerWidth - btnWidth - padding;
+  const maxY = window.innerHeight - btnHeight - padding;
 
   const randomX = Math.random() * maxX;
   const randomY = Math.random() * maxY;
