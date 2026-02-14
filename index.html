@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Do You Wanna be my GF?</title>
 
   <style>
@@ -12,12 +13,11 @@
 
     body {
       margin: 0;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fff5f8, #ffe3ec);
       display: flex;
       justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #fff5f8, #ffe3ec);
+      padding: 50px 20px;
     }
 
     /* Floating wallpaper */
@@ -46,10 +46,12 @@
       position: relative;
       z-index: 1;
       text-align: center;
+      max-width: 750px;
+      width: 100%;
     }
 
     h1 {
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       color: #ff5c8a;
       margin-bottom: 40px;
     }
@@ -59,6 +61,7 @@
       display: flex;
       gap: 30px;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     button {
@@ -99,17 +102,21 @@
     }
 
     .result h1 {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
     }
 
     .result p {
       color: #ff6fa5;
-      font-size: 1.2rem;
-      max-width: 400px;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      margin-top: 25px;
+      padding: 0 10px;
+      white-space: pre-line;
     }
 
     .result img {
       width: 320px;
+      max-width: 90%;
       margin-top: 25px;
       border-radius: 20px;
       box-shadow: 0 10px 40px rgba(255,111,165,0.4);
@@ -130,6 +137,26 @@
       to {
         transform: translateY(100vh) rotate(720deg);
         opacity: 0;
+      }
+    }
+
+    /* 📱 Mobile */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .result h1 {
+        font-size: 1.6rem;
+      }
+
+      .result p {
+        font-size: 1rem;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 14px 28px;
       }
     }
 
@@ -156,23 +183,23 @@
       alt="Romantic gif"
     />
 
-    <p style="margin-top:25px; max-width:500px;">
-      Happy MONTHAVERSARY and also Happy VALENTINES day My DEAR CHINKARANNIIII.
+    <p>
+Happy MONTHAVERSARY and also Happy VALENTINES day My DEAR CHINKARANNIIII.
 
-      I am grate to god that I got to meet you.. That last 2.7 years literally were like a rollercoaster,
-      each time i get to be with you, I feel butterfly in my tummy. 
-      Babe, You are the one god had tied my invisible string to.
-            You are the one that I am enchanted to meet.
-            You are the one that I will marry with paper rings.
-            You are the one who is a Tear in my Heart.
-            You are the one for whom, I will get beat to smithereens.
-     
-      Chinkarani, You are the one I would forever like to treasure, in my heart, my eyes, and my soul.
+I am grate to god that I got to meet you.. That last 2.7 years literally were like a rollercoaster,
+each time i get to be with you, I feel butterfly in my tummy. 
+Babe, You are the one god had tied my invisible string to.
+You are the one that I am enchanted to meet.
+You are the one that I will marry with paper rings.
+You are the one who is a Tear in my Heart.
+You are the one for whom, I will get beat to smithereens.
 
-      Once again, happy valentines day love. To the next 768 valentines that I promise we will celebrate together.
+Chinkarani, You are the one I would forever like to treasure, in my heart, my eyes, and my soul.
 
-      - Your Love, 
-        Muditiii
+Once again, happy valentines day love. To the next 768 valentines that I promise we will celebrate together.
+
+- Your Love, 
+Muditiii
     </p>
   </div>
 
@@ -182,7 +209,6 @@
     const questionBox = document.getElementById("questionBox");
     const resultBox = document.getElementById("resultBox");
 
-    /* 🎉 YES click with confetti */
     yesBtn.addEventListener("click", () => {
 
       const colors = ["#ff6fa5", "#ffd166", "#06d6a0", "#118ab2", "#ef476f"];
@@ -203,17 +229,16 @@
           Math.random() * 1 + 1.5 + "s";
 
         document.body.appendChild(confetti);
-
         setTimeout(() => confetti.remove(), 2500);
       }
 
       setTimeout(() => {
         questionBox.style.display = "none";
         resultBox.style.display = "flex";
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }, 600);
     });
 
-    /* NO runs away */
     let firstMove = true;
 
     noBtn.addEventListener("mouseenter", () => {
@@ -237,7 +262,6 @@
       noBtn.style.top = y + "px";
     });
 
-    /* Floating emojis */
     const bg = document.getElementById("background");
     const emojis = ["🦆","🐹","💗","💖","🩷"];
 
